@@ -54,7 +54,7 @@ fi
 
 
 # ==================== WorkBuddy 定制：固化刷机修复项 ====================
-# 把用户现有的 4 项手动修复做成 uci-defaults，刷机首次开机自动应用
+# 把用户现有的手动修复做成 uci-defaults，刷机首次开机自动应用
 mkdir -p files/etc/uci-defaults
 cat > files/etc/uci-defaults/zz_workbuddy_fixes <<'WBEOF'
 #!/bin/sh
@@ -77,6 +77,24 @@ grep -q 'read_ahead_kb' /etc/rc.local 2>/dev/null || sed -i '/^exit 0/i [ -e /sy
 if [ -d /etc/apk/repositories.d ]; then
     PKU="https://mirrors.pku.edu.cn/immortalwrt/snapshots/targets/qualcommax/ipq60xx/packages/packages.adb"
     grep -q 'mirrors.pku.edu.cn' /etc/apk/repositories.d/distfeeds.list 2>/dev/null || echo "$PKU" >> /etc/apk/repositories.d/distfeeds.list
+fi
+
+# 5) 空闲数据分区自动挂载：222G 的 ext4 数据分区挂到 /mnt/data
+# 出厂 block-detect 生成的 fstab 里该分区 enabled=0，默认不挂载；这里按 UUID 显式启用
+# 精简固件无 blkid，故写死该分区 UUID（不重新格式化即稳定不变）；保留配置时已有 data 段则纠正字段
+if command -v uci >/dev/null 2>&1; then
+    UUID_DATA='affc3952-238d-4d9f-81c7-5136b5974ab9'
+    if ! uci -q get fstab.data >/dev/null 2>&1; then
+        uci add fstab mount >/dev/null 2>&1
+        uci rename fstab.@mount[-1]=data >/dev/null 2>&1
+    fi
+    uci set fstab.data.target='/mnt/data' >/dev/null 2>&1
+    uci set fstab.data.uuid="$UUID_DATA" >/dev/null 2>&1
+    uci set fstab.data.options='noatime' >/dev/null 2>&1
+    uci set fstab.data.enabled='1' >/dev/null 2>&1
+    uci commit fstab >/dev/null 2>&1
+    mkdir -p /mnt/data 2>/dev/null
+    /etc/init.d/fstab restart >/dev/null 2>&1 || block mount >/dev/null 2>&1
 fi
 
 exit 0
