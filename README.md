@@ -17,7 +17,7 @@ https://github.com/1980490718/u-boot-2016.git
 
 # 12M 大分区 U-BOOT + 2G GPT 分区表（京东云 AX1800 Pro 配套扩容方案）
 
-两件配套使用，用于把 rootfs 扩到 2048MiB 并启用 12M 内核分区。作者可能发布新版，请从下列仓库/Release 页自行取最新版本，不写死直链。
+两件配套使用，用于把 rootfs 扩到 2048MiB 并启用 12M 内核分区。作者可能发布新版，请从下列仓库/Release 页自行取最新版本。
 
 12M 大分区 U-BOOT（HLOS 12MiB）：
 
