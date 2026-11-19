@@ -1,77 +1,106 @@
-#设备平台
-CONFIG_TARGET_mediatek=y
-CONFIG_TARGET_mediatek_filogic=y
-#设备列表
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_abt_asr3000=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_airpi_ap3000m=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_asus_tuf-ax4200=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_asus_tuf-ax4200q=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_asus_tuf-ax6000=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_cetron_ct3003-stock=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_cetron_ct3003-ubootmod=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_cmcc_a10-stock=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_cmcc_a10-ubootmod=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_cmcc_rax3000m=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_cmcc_rax3000me=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_comfast_cf-e393ax=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_comfast_cf-wr632ax=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_comfast_cf-wr632ax-ubootmod=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_comfast_cf-xr186=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_creatlentem_clt-r30b1=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_creatlentem_clt-r30b1-112m=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_cudy_tr3000-v1=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_cudy_tr3000-v1-256mb=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_cudy_tr3000-v1-ubootmod=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_glinet_gl-mt3000=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_glinet_gl-mt3600be=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_glinet_gl-mt6000=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_glinet_gl-x3000=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_glinet_gl-xe3000=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_globitel_bt-r320=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_h3c_magic-nx30-pro-ubootmod=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_huasifei_wh3000-emmc=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_huasifei_wh3000-pro-emmc=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_huasifei_wh3000-pro-nand=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_imou_hx21=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_jcg_q30-pro=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_jdcloud_re-cp-03=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_konka_komi-a31=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_netcore_n60=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_netcore_n60-pro=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_nokia_ea0326gmp=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_qihoo_360t7=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_qihoo_360t7-ubi=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_ruijie_rg-x60=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_ruijie_rg-x60-pro=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_supergateway_s20l=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_supergateway_s20p=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tenda_be12-pro=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-7dr7230-v1=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-7dr7230-v2=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-7dr7250-v1=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-7dr7299-v1=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-xdr4288=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-xdr6086=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-xdr6088=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_tl-xtr8488=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_wma301-v2-1-256m-ubootmod=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_wma301-v2-1-ubootmod=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_wma301-v2-256m-ubootmod=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_tplink_wma301-v2-ubootmod=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_mi-router-ax3000t-stock=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_mi-router-ax3000t-ubootmod=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_mi-router-wr30u-stock=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_mi-router-wr30u-ubootmod=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_redmi-router-ax6000-stock=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_xiaomi_redmi-router-ax6000-ubootmod=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_zbtlink_zbt-z8102ax=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_zbtlink_zbt-z8102ax-v2=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_zbtlink_zbt-z8103ax=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_zbtlink_zbt-z8103ax-c=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_zbtlink_zbt-z8106ax-s=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_zbtlink_zbt-z8106ax-t=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_zbtlink_zbt-z8803be=y
-CONFIG_TARGET_DEVICE_mediatek_filogic_DEVICE_zyxel_ex5700-telenor=y
-#内核调整
-CONFIG_PACKAGE_kmod-cryptodev=y
-CONFIG_PACKAGE_kmod-tls=y
+# ============================================================
+# 京东云 AX1800 Pro (jdcloud_re-ss-01) 精简固件编译配置
+# 目标：复刻现有 27MB 精简版插件集 + 升级到新内核 (6.18)
+# 用法：替换上游 Config/IPQ60XX-WIFI-YES.txt 的内容
+# 生成日期：2026-11-19
+# ============================================================
+
+# ---------- 设备平台：qualcommax / ipq60xx ----------
+CONFIG_TARGET_qualcommax=y
+CONFIG_TARGET_qualcommax_ipq60xx=y
+
+# ---------- 只编译 re-ss-01（亚瑟）一台设备 ----------
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_jdcloud_re-ss-01=y
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_qihoo_360v6=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_anysafe_e1=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_cmiot_ax18=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_dptech_ap3000-2c=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_glinet_gl-ax1800=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_glinet_gl-axt1800=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_jdcloud_re-cs-02=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_link_nn6000-v1=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_link_nn6000-v2=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_linksys_mr7350=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_linksys_mr7500=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_philips_ly1800=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_redmi_ax5=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_redmi_ax5-jdcloud=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_sy_y6010=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_xiaomi_ax1800=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_zn_m2=n
+
+# ---------- 编译参数：单设备、不要 initramfs ----------
+CONFIG_TARGET_MULTI_PROFILE=n
+CONFIG_TARGET_PER_DEVICE_ROOTFS=n
+CONFIG_TARGET_ROOTFS_INITRAMFS=n
+
+# ---------- 复刻现有插件 ----------
+# Argon 主题（现有固件在用）
+# 注：argon 主题本体由 Packages.sh 自动拉取；argon-config 来自 feed，
+# 若编译报 "luci-app-argon-config not found"，把下面两行改成 =n 即可
+CONFIG_PACKAGE_luci-theme-argon=y
+CONFIG_PACKAGE_luci-app-argon-config=y
+CONFIG_PACKAGE_luci-i18n-argon-config-zh-cn=y
+# 上游默认主题 vantage 关掉（Settings.sh 会注入，这里覆盖）
+CONFIG_PACKAGE_luci-theme-vantage=n
+CONFIG_PACKAGE_luci-app-vantage=n
+CONFIG_PACKAGE_luci-app-vantage-config=n
+
+# 科学上网：passwall（现有固件在用）；上游默认是 homeproxy，关掉
+CONFIG_PACKAGE_luci-app-passwall=y
+CONFIG_PACKAGE_luci-i18n-passwall-zh-cn=y
+CONFIG_PACKAGE_luci-app-homeproxy=n
+CONFIG_PACKAGE_homeproxy=n
+
+# DNS / 代理组件（passwall 依赖链，显式保留）
+CONFIG_PACKAGE_chinadns-ng=y
+CONFIG_PACKAGE_dns2socks=y
+CONFIG_PACKAGE_smartdns=y
+CONFIG_PACKAGE_luci-app-smartdns=y
+CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
+
+# 宽带监控 / 硬盘休眠 / 文件共享
+CONFIG_PACKAGE_luci-app-nlbwmon=y
+CONFIG_PACKAGE_luci-i18n-nlbwmon-zh-cn=y
+CONFIG_PACKAGE_luci-app-hd-idle=y
+CONFIG_PACKAGE_luci-i18n-hd-idle-zh-cn=y
+CONFIG_PACKAGE_hd-idle=y
+CONFIG_PACKAGE_luci-app-samba4=y
+CONFIG_PACKAGE_luci-i18n-samba4-zh-cn=y
+CONFIG_PACKAGE_samba4-server=y
+
+# UPnP / KMS 激活 / 定时重启
+CONFIG_PACKAGE_luci-app-upnp=y
+CONFIG_PACKAGE_luci-i18n-upnp-zh-cn=y
+CONFIG_PACKAGE_miniupnpd-nftables=y
+CONFIG_PACKAGE_luci-app-vlmcsd=y
+CONFIG_PACKAGE_luci-i18n-vlmcsd-zh-cn=y
+CONFIG_PACKAGE_vlmcsd=y
+CONFIG_PACKAGE_luci-app-autoreboot=y
+CONFIG_PACKAGE_luci-i18n-autoreboot-zh-cn=y
+
+# 常用工具（现有固件里有）
+CONFIG_PACKAGE_curl=y
+CONFIG_PACKAGE_ethtool=y
+CONFIG_PACKAGE_coreutils=y
+CONFIG_PACKAGE_coreutils-base64=y
+CONFIG_PACKAGE_coreutils-nohup=y
+CONFIG_PACKAGE_coreutils-timeout=y
+CONFIG_PACKAGE_gdisk=y
+CONFIG_PACKAGE_sgdisk=y
+CONFIG_PACKAGE_unzip=y
+CONFIG_PACKAGE_ip-full=y
+CONFIG_PACKAGE_avahi-dbus-daemon=y
+
+# ---------- 关掉上游默认但不需要的插件（精简体积）----------
+CONFIG_PACKAGE_luci-app-gecoosac=n
+CONFIG_PACKAGE_luci-app-mini-diskmanager=n
+CONFIG_PACKAGE_luci-app-natmapt=n
+CONFIG_PACKAGE_luci-app-partexp=n
+CONFIG_PACKAGE_luci-app-wolultra=n
+CONFIG_PACKAGE_luci-app-attendedsysupgrade=n
+CONFIG_PACKAGE_luci-app-wol=n
+
+# ---------- NSS 硬件加速：由 target 默认包提供，勿关 ----------
+# kmod-qca-nss-* 全套由 target/linux/qualcommax/Makefile 的 DEFAULT_PACKAGES 自动带入
+# 6.18 内核原生支持，无需手动指定
