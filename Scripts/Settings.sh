@@ -66,8 +66,9 @@ if [ -f /etc/init.d/nlbwmon ]; then
     /etc/init.d/nlbwmon enable 2>/dev/null
 fi
 
-# 2) NSS ECM 前端选择（避免部分环境断流）
-grep -q 'front_end_selection' /etc/modules.conf 2>/dev/null || echo 'options ecm front_end_selection=0' >> /etc/modules.conf
+# 2) NSS ECM 前端选择：无需手动设置
+# qca-nss-ecm 的 init 脚本会在每次启动时根据硬件自动计算并写入 front_end_selection，
+# 手动写死反而可能与它冲突，故移除（2026-11-19 复查）。
 
 # 3) eMMC 预读优化（提升 Samba 读吞吐）
 grep -q 'read_ahead_kb' /etc/rc.local 2>/dev/null || sed -i '/^exit 0/i [ -e /sys/block/mmcblk0/queue/read_ahead_kb ] \&\& echo 4096 > /sys/block/mmcblk0/queue/read_ahead_kb' /etc/rc.local
