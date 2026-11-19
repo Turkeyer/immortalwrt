@@ -79,7 +79,29 @@ if [ -d /etc/apk/repositories.d ]; then
     grep -q 'mirrors.pku.edu.cn' /etc/apk/repositories.d/distfeeds.list 2>/dev/null || echo "$PKU" >> /etc/apk/repositories.d/distfeeds.list
 fi
 
-# 5) 空闲数据分区自动挂载：ext4 的 DATA 分区挂到 /mnt/data（128G/256G 容量自适应）
+# 5) 首次开机格式化 DATA 分区，清除原厂 PCDN 跑分缓存残留
+# 机制：依赖 uci-defaults "仅全新配置首次开机执行、执行后自删" 的特性——
+#   - uboot 刷 factory / sysupgrade 不保留配置 → 全新 overlay → 执行 → 格式化
+#   - sysupgrade 保留配置 → 沿用旧 overlay，本脚本上次首启已自删 → 不执行，数据保留
+# 按 LABEL="DATA" 定位（128G/256G 通用），绝不写死分区号或 UUID
+# 必须带 -L DATA 保留卷标，否则第 6 项按 LABEL 探测 UUID 会失效
+# 警告：格式化会清空 DATA 分区全部数据（跑分缓存/共享文件），仅在确认无需保留时执行
+if command -v mkfs.ext4 >/dev/null 2>&1 && command -v block >/dev/null 2>&1; then
+    DATA_DEV=""
+    for _i in 1 2 3; do
+        DATA_DEV=$(block info 2>/dev/null | awk -F: '/LABEL="DATA"/{print $1; exit}')
+        [ -n "$DATA_DEV" ] && break
+        sleep 1
+    done
+    # 安全：设备须存在，且不能是当前根设备（防止误伤系统分区）
+    ROOT_SRC=$(awk '$2=="/"{print $1;exit}' /proc/mounts 2>/dev/null)
+    if [ -n "$DATA_DEV" ] && [ -b "$DATA_DEV" ] && [ "$DATA_DEV" != "$ROOT_SRC" ]; then
+        umount "$DATA_DEV" 2>/dev/null
+        mkfs.ext4 -F -q -L DATA "$DATA_DEV" >/dev/null 2>&1
+    fi
+fi
+
+# 6) 空闲数据分区自动挂载：ext4 的 DATA 分区挂到 /mnt/data（128G/256G 容量自适应）
 # 出厂 block-detect 生成的 fstab 里该分区 enabled=0，默认不挂载；这里动态探测并按 LABEL 启用
 # 关键：绝不写死 UUID（不同容量机器 UUID 不同）。用固件自带 block info 按 LABEL="DATA" 动态读，
 # 读不到时也不破坏已有配置——只把已存在的 data 段 enabled 置 1。
