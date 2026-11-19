@@ -79,22 +79,31 @@ if [ -d /etc/apk/repositories.d ]; then
     grep -q 'mirrors.pku.edu.cn' /etc/apk/repositories.d/distfeeds.list 2>/dev/null || echo "$PKU" >> /etc/apk/repositories.d/distfeeds.list
 fi
 
-# 5) 空闲数据分区自动挂载：222G 的 ext4 数据分区挂到 /mnt/data
-# 出厂 block-detect 生成的 fstab 里该分区 enabled=0，默认不挂载；这里按 UUID 显式启用
-# 精简固件无 blkid，故写死该分区 UUID（不重新格式化即稳定不变）；保留配置时已有 data 段则纠正字段
+# 5) 空闲数据分区自动挂载：ext4 的 DATA 分区挂到 /mnt/data（128G/256G 容量自适应）
+# 出厂 block-detect 生成的 fstab 里该分区 enabled=0，默认不挂载；这里动态探测并按 LABEL 启用
+# 关键：绝不写死 UUID（不同容量机器 UUID 不同）。用固件自带 block info 按 LABEL="DATA" 动态读，
+# 读不到时也不破坏已有配置——只把已存在的 data 段 enabled 置 1。
 if command -v uci >/dev/null 2>&1; then
-    UUID_DATA='affc3952-238d-4d9f-81c7-5136b5974ab9'
-    if ! uci -q get fstab.data >/dev/null 2>&1; then
-        uci add fstab mount >/dev/null 2>&1
-        uci rename fstab.@mount[-1]=data >/dev/null 2>&1
+    # 动态获取当前机器 DATA 分区的真实 UUID（LABEL=DATA 在 128G/256G 上均一致）
+    UUID_DATA=$(block info 2>/dev/null | awk '/LABEL="DATA"/{for(i=1;i<=NF;i++) if($i~/^UUID=/){gsub(/"/,"",$i);sub(/^UUID=/,"",$i);print $i;exit}}')
+    if [ -n "$UUID_DATA" ]; then
+        # 探测到 UUID：data 段不存在则新建，存在则纠正字段
+        if ! uci -q get fstab.data >/dev/null 2>&1; then
+            uci add fstab mount >/dev/null 2>&1
+            uci rename fstab.@mount[-1]=data >/dev/null 2>&1
+        fi
+        uci set fstab.data.target='/mnt/data' >/dev/null 2>&1
+        uci set fstab.data.uuid="$UUID_DATA" >/dev/null 2>&1
+        uci set fstab.data.options='noatime' >/dev/null 2>&1
+        uci set fstab.data.enabled='1' >/dev/null 2>&1
+        uci commit fstab >/dev/null 2>&1
+        mkdir -p /mnt/data 2>/dev/null
+        /etc/init.d/fstab restart >/dev/null 2>&1 || block mount >/dev/null 2>&1
+    elif uci -q get fstab.data >/dev/null 2>&1; then
+        # 首次开机早期可能探测不到分区；保留配置场景只需确保其启用，不动原 UUID
+        uci set fstab.data.enabled='1' >/dev/null 2>&1
+        uci commit fstab >/dev/null 2>&1
     fi
-    uci set fstab.data.target='/mnt/data' >/dev/null 2>&1
-    uci set fstab.data.uuid="$UUID_DATA" >/dev/null 2>&1
-    uci set fstab.data.options='noatime' >/dev/null 2>&1
-    uci set fstab.data.enabled='1' >/dev/null 2>&1
-    uci commit fstab >/dev/null 2>&1
-    mkdir -p /mnt/data 2>/dev/null
-    /etc/init.d/fstab restart >/dev/null 2>&1 || block mount >/dev/null 2>&1
 fi
 
 exit 0
