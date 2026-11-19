@@ -51,3 +51,35 @@ if [[ "${WRT_TARGET^^}" == *"QUALCOMMAX"* ]]; then
 		echo "qualcommax set up nowifi successfully!"
 	fi
 fi
+
+
+# ==================== WorkBuddy 定制：固化刷机修复项 ====================
+# 把用户现有的 4 项手动修复做成 uci-defaults，刷机首次开机自动应用
+mkdir -p files/etc/uci-defaults
+cat > files/etc/uci-defaults/zz_workbuddy_fixes <<'WBEOF'
+#!/bin/sh
+# 京东云 re-ss-01 刷机后自动修复（首次开机执行一次，之后自动删除）
+
+# 1) nlbwmon 宽带监控：加载 conntrack netlink 模块，修复默认不工作
+if [ -f /etc/init.d/nlbwmon ]; then
+    sed -i '/^start_service() {/a\	rmmod nf_conntrack_netlink 2>/dev/null\n\tmodprobe nf_conntrack_netlink 2>/dev/null' /etc/init.d/nlbwmon
+    /etc/init.d/nlbwmon enable 2>/dev/null
+fi
+
+# 2) NSS ECM 前端选择（避免部分环境断流）
+grep -q 'front_end_selection' /etc/modules.conf 2>/dev/null || echo 'options ecm front_end_selection=0' >> /etc/modules.conf
+
+# 3) eMMC 预读优化（提升 Samba 读吞吐）
+grep -q 'read_ahead_kb' /etc/rc.local 2>/dev/null || sed -i '/^exit 0/i [ -e /sys/block/mmcblk0/queue/read_ahead_kb ] \&\& echo 4096 > /sys/block/mmcblk0/queue/read_ahead_kb' /etc/rc.local
+
+# 4) APK 软件源：确保北大镜像源存在（去掉重复的 vsean 首行以防冲突）
+if [ -d /etc/apk/repositories.d ]; then
+    PKU="https://mirrors.pku.edu.cn/immortalwrt/snapshots/targets/qualcommax/ipq60xx/packages/packages.adb"
+    grep -q 'mirrors.pku.edu.cn' /etc/apk/repositories.d/distfeeds.list 2>/dev/null || echo "$PKU" >> /etc/apk/repositories.d/distfeeds.list
+fi
+
+exit 0
+WBEOF
+chmod +x files/etc/uci-defaults/zz_workbuddy_fixes
+echo "WorkBuddy: uci-defaults fix script injected"
+# ==================== end WorkBuddy 定制 ====================
