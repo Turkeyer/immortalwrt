@@ -1,0 +1,6 @@
+# === WorkBuddy 定制：在 Settings.sh 注入之后执行，用于覆盖默认值 ===
+# 关掉 workflow 强制注入的 vantage 主题（保留 argon）
+CONFIG_PACKAGE_luci-theme-vantage=n
+CONFIG_PACKAGE_luci-app-vantage=n
+CONFIG_PACKAGE_luci-app-vantage-config=n
+CONFIG_PACKAGE_luci-i18n-vantage-theme-zh-cn=n
