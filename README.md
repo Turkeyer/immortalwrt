@@ -38,6 +38,24 @@ https://github.com/1980490718/u-boot-2016.git
 4. 之后在系统内 Web 升级用 sysupgrade.bin。
 
 
+# 固件刷入方式（按当前状态选择）
+
+本机当前状态：已是 12M HLOS + 2G rootfs 大分区，uboot 与 GPT 均已就位。日常升级无需再动 uboot。
+
+| 当前情况 | 刷入方式 | 刷哪个文件 | 入口 |
+|---|---|---|---|
+| 系统正常、能进 LuCI（日常升级、本次新固件） | LuCI 后台网页升级，勾选"保留配置" | `*-squashfs-sysupgrade-*.bin` | 系统 → 备份/升级 → 刷写固件 |
+| 系统进不去、但 uboot 还能进 | uboot 网页刷入 | `*-squashfs-factory-*.bin` | http://192.168.1.1/ |
+| 首次扩容或彻底变砖 | 依次刷 uboot、GPT、固件 | uboot .bin → GPT .bin → factory.bin | /uboot.html → /img.html → /uboot 首页 |
+
+说明：
+
+- sysupgrade.bin：系统内升级用，带板子型号校验；勾选"保留配置"可保住 WiFi、拨号、WireGuard 及各插件设置。
+- factory.bin：kernel + rootfs 拼接，供 uboot 网页刷入或首次刷机；会覆盖系统分区。
+- uboot 后台默认 IP 为 192.168.1.1，可在 Web 内"系统 → 网络设置"修改。
+- 本次为 6.12 → 6.18 跨内核大版本升级：刷前先在 LuCI 导出配置备份；若刷后 NSS 异常，删除 /etc/config/nss、/etc/config/ecm 后重启。
+
+
 # 固件简要说明
 
 
