@@ -20,36 +20,21 @@ https://github.com/VIKINGYFY/immortalwrt.git
 
 # U-BOOT
 
-高通版-沉心：
-
-https://github.com/chenxin527/uboot-qsdk12.5-build.git
 
 高通版-小猪：
 
 https://github.com/1980490718/u-boot-2016.git
 
-京东云 AX1800 Pro（re-ss-01 / 亚瑟）自用 U-BOOT — main/v2026-11-15：
+京东云 AX1800 Pro（re-ss-01 / 亚瑟）自用 U-BOOT — main/
 
-- Release 页面：https://github.com/1980490718/u-boot-2016/releases/tag/main/v2026-11-15
-- 机型文件（ipq6018_ax1800pro）：https://github.com/1980490718/u-boot-2016/releases/download/main/v2026-11-15/openwrt-ipq6018_ax1800pro-u-boot-main-20261115-135918.mbn
-- 编译信息：Branch `main` / Commit `1f0979a` / Build 2026-11-15 13:59:18 (UTC+8) / 大小约 0.46 MB
+- Release 页面：https://github.com/1980490718/u-boot-2016/releases/
+- 机型文件（ipq6018_ax1800pro）：openwrt-ipq6018_ax1800pro-u-boot
+
 - 用途：不死 U-BOOT，用于刷机与救砖；刷入前请确认分区布局（原厂 / 大分区）与机型匹配。
 
-联发科-全新版：
-
-https://github.com/VIKINGYFY/UBOOT-CI/releases
-
-联发科-官方版：
-
-https://drive.wrt.moe/uboot/mediatek
 
 # 固件简要说明
 
-固件每天早上5点自动编译。
-
-固件信息里的时间为编译开始的时间，方便核对上游源码提交时间。
-
-MEDIATEK系列、QUALCOMMAX系列、ROCKCHIP系列、X86系列。
 
 # 目录简要说明
 
