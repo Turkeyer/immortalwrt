@@ -79,29 +79,27 @@ if [ -d /etc/apk/repositories.d ]; then
     grep -q 'mirrors.pku.edu.cn' /etc/apk/repositories.d/distfeeds.list 2>/dev/null || echo "$PKU" >> /etc/apk/repositories.d/distfeeds.list
 fi
 
-# 5) 首次开机格式化 DATA 分区，清除原厂 PCDN 跑分缓存残留
-# 机制：依赖 uci-defaults "仅全新配置首次开机执行、执行后自删" 的特性——
-#   - uboot 刷 factory / sysupgrade 不保留配置 → 全新 overlay → 执行 → 格式化
-#   - sysupgrade 保留配置 → 沿用旧 overlay，本脚本上次首启已自删 → 不执行，数据保留
-# 按 LABEL="DATA" 定位（128G/256G 通用），绝不写死分区号或 UUID
-# 必须带 -L DATA 保留卷标，否则第 6 项按 LABEL 探测 UUID 会失效
-# 警告：格式化会清空 DATA 分区全部数据（跑分缓存/共享文件），仅在确认无需保留时执行
-if command -v mkfs.ext4 >/dev/null 2>&1 && command -v block >/dev/null 2>&1; then
-    DATA_DEV=""
-    for _i in 1 2 3; do
-        DATA_DEV=$(block info 2>/dev/null | awk -F: '/LABEL="DATA"/{print $1; exit}')
-        [ -n "$DATA_DEV" ] && break
-        sleep 1
-    done
-    # 安全：设备须存在，且不能是当前根设备（防止误伤系统分区）
-    ROOT_SRC=$(awk '$2=="/"{print $1;exit}' /proc/mounts 2>/dev/null)
-    if [ -n "$DATA_DEV" ] && [ -b "$DATA_DEV" ] && [ "$DATA_DEV" != "$ROOT_SRC" ]; then
-        umount "$DATA_DEV" 2>/dev/null
-        mkfs.ext4 -F -q -L DATA "$DATA_DEV" >/dev/null 2>&1
-    fi
-fi
+# 5) 关闭流卸载，避免与 NSS offload 冲突导致 LAN 口单向不通
+# 固件默认 flow_offloading=1 / flow_offloading_hw=1，nss-wifi 的 flowtable.sh 会据此
+# 把 bridge_offload=1 写进 NSS 驱动；在保留配置升级场景下会与旧残留配置冲突，
+# 造成 lan2 只收不发的故障。这里统一关闭，让 NSS 走硬件加速但桥接走稳定路径。
+uci set firewall.@defaults[0].flow_offloading='0' 2>/dev/null
+uci set firewall.@defaults[0].flow_offloading_hw='0' 2>/dev/null
+# 确保 NSS 硬件加速开启（WiFi 性能关键）；配合上面关闭流卸载，LAN 与加速可以兼得
+uci set nss-wifi.general.offload='1' 2>/dev/null
+uci commit nss-wifi 2>/dev/null
+# 删除旧固件残留的 qcanssecm include（指向新固件不存在的 /etc/firewall.d/qca-nss-ecm）
+uci -q delete firewall.qcanssecm 2>/dev/null
+# 清理旧 NSS/ECM 残留段（新固件无 qca-nss-ecm，这些段无人读取且可能引发冲突）
+uci -q delete nss.general 2>/dev/null
+uci -q delete ecm.global 2>/dev/null
+uci -q delete ecm.general 2>/dev/null
+uci commit firewall 2>/dev/null
+uci commit nss 2>/dev/null
+uci commit ecm 2>/dev/null
 
 # 6) 空闲数据分区自动挂载：ext4 的 DATA 分区挂到 /mnt/data（128G/256G 容量自适应）
+# 注意：不格式化 DATA 分区，只按 LABEL 探测并挂载，数据完整保留
 # 出厂 block-detect 生成的 fstab 里该分区 enabled=0，默认不挂载；这里动态探测并按 LABEL 启用
 # 关键：绝不写死 UUID（不同容量机器 UUID 不同）。用固件自带 block info 按 LABEL="DATA" 动态读，
 # 读不到时也不破坏已有配置——只把已存在的 data 段 enabled 置 1。
