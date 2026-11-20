@@ -126,6 +126,19 @@ if command -v uci >/dev/null 2>&1; then
     fi
 fi
 
+
+# 7) 全局关闭 IPv6（家宽为联通，跨网访问移动 IPv6 段 2409 不通，
+# 运营商 App 因优先走 IPv6 而卡死打不开）。以下 6 项复现实测有效的关闭方式，
+# 让系统只走 IPv4，不影响 NSS/WiFi 硬件加速。
+uci set network.wan6.disabled='1' 2>/dev/null
+uci set network.wan6.norelease='1' 2>/dev/null
+uci -q delete network.lan.ip6assign 2>/dev/null
+uci -q delete dhcp.lan.ra 2>/dev/null
+uci -q delete dhcp.lan.dhcpv6 2>/dev/null
+uci set dhcp.@dnsmasq[0].filter_aaaa='1' 2>/dev/null
+uci commit network 2>/dev/null
+uci commit dhcp 2>/dev/null
+
 exit 0
 WBEOF
 chmod +x files/etc/uci-defaults/zz_workbuddy_fixes
