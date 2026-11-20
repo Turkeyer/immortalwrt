@@ -4,3 +4,15 @@ CONFIG_PACKAGE_luci-theme-vantage=n
 CONFIG_PACKAGE_luci-app-vantage=n
 CONFIG_PACKAGE_luci-app-vantage-config=n
 CONFIG_PACKAGE_luci-i18n-vantage-theme-zh-cn=n
+
+# 移除不需要的插件（GENERAL.txt 会把它们重新设为 =y，此处最后加载覆盖关闭）
+# Vlmcsd KMS 服务器（家庭用不到）
+CONFIG_PACKAGE_luci-app-vlmcsd=n
+CONFIG_PACKAGE_vlmcsd=n
+CONFIG_PACKAGE_luci-i18n-vlmcsd-zh-cn=n
+# 集客无线 AC 控制器（多AP/Portal 场景用不到）
+CONFIG_PACKAGE_luci-app-gecoosac=n
+CONFIG_PACKAGE_gecoosac=n
+# NATMap NAT 打洞（有 ddns-go/WireGuard，用不到）
+CONFIG_PACKAGE_luci-app-natmapt=n
+CONFIG_PACKAGE_natmap=n
