@@ -41,7 +41,7 @@ https://github.com/1980490718/u-boot-2016.git
 
 # 固件刷入方式（按当前状态选择）
 
-本机当前状态：已是 12M HLOS + 2G rootfs 大分区，uboot 与 GPT 均已就位。日常升级无需再动 uboot。
+已经是 12M HLOS + 2G rootfs 大分区，uboot 与 GPT 均已就位的机器日常升级无需再动 uboot。
 
 | 当前情况 | 刷入方式 | 刷哪个文件 | 入口 |
 |---|---|---|---|
