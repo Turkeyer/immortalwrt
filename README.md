@@ -7,7 +7,7 @@
 
 https://github.com/1980490718/u-boot-2016.git
 
-京东云 AX1800 Pro（re-ss-01 / 亚瑟）自用 U-BOOT — main/
+京东云 AX1800 Pro（re-ss-01 / 亚瑟）自用 U-BOOT 
 
 - Release 页面：https://github.com/1980490718/u-boot-2016/releases/
 - 机型文件（ipq6018_ax1800pro）：openwrt-ipq6018_ax1800pro-u-boot
