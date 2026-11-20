@@ -17,7 +17,7 @@ https://github.com/1980490718/u-boot-2016.git
 
 # 12M 大分区 U-BOOT + 2G GPT 分区表（京东云 AX1800 Pro 配套扩容方案）
 
-两件配套使用，用于把 rootfs 扩到 2048MiB 并启用 12M 内核分区。作者可能发布新版，请从下列仓库/Release 页自行取最新版本。
+两件配套使用，用于把 rootfs 扩到 2048MiB 并启用 12M 内核分区。U-BOOT 作者可能发布新版，可从下列 Release 页取最新；GPT 分区表已备份在本仓库（见下方直链）。
 
 12M 大分区 U-BOOT（HLOS 12MiB）：
 
@@ -25,10 +25,11 @@ https://github.com/1980490718/u-boot-2016.git
 - Release 列表：https://github.com/chenxin527/uboot-qsdk12.5-build/releases
 - 机型文件关键字：jdcloud_re-ss-01 / ipq60xx（在最新 Release 中按机型挑选）
 
-2G GPT 分区表（rootfs 2048M / HLOS 12M）：
+2G GPT 分区表（rootfs 2048M / HLOS 12M）——本仓库备份，直接下载：
 
-- 仓库：https://github.com/natserver/istoreos
-- 文件路径：docs/gpt-JDC_AX1800_Pro_dual-boot_rootfs2048M_HLOS12M_no-last-partition.bin（在仓库内查找，作者可能更新文件名）
+- 直链：https://raw.githubusercontent.com/Turkeyer/immortalwrt/main/Firmware/gpt-JDC_AX1800_Pro_rootfs2048M_HLOS12M.bin
+- 仓库内路径：`Firmware/gpt-JDC_AX1800_Pro_rootfs2048M_HLOS12M.bin`
+- MD5：`4e68b53b2646a4824aed74a4f5b656ea`（17408 字节，下载后可校验）
 
 刷机顺序（在旧 U-BOOT 的网页界面操作）：
 
