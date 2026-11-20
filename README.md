@@ -53,7 +53,6 @@ https://github.com/1980490718/u-boot-2016.git
 - sysupgrade.bin：系统内升级用，带板子型号校验；勾选"保留配置"可保住 WiFi、拨号、WireGuard 及各插件设置。
 - factory.bin：kernel + rootfs 拼接，供 uboot 网页刷入或首次刷机；会覆盖系统分区。
 - uboot 后台默认 IP 为 192.168.1.1，可在 Web 内"系统 → 网络设置"修改。
-- 本次为 6.12 → 6.18 跨内核大版本升级：刷前先在 LuCI 导出配置备份；若刷后 NSS 异常，删除 /etc/config/nss、/etc/config/ecm 后重启。
 
 
 # 固件简要说明
