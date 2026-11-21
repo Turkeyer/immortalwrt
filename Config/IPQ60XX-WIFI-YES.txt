@@ -1,5 +1,5 @@
 # ============================================================
-# 京东云 AX1800 Pro (jdcloud_re-ss-01) 精简固件编译配置
+# 京东云 AX6600 雅典娜 (jdcloud_re-cs-02) 精简固件编译配置
 # 目标：复刻现有 27MB 精简版插件集 + 升级到新内核 (6.18)
 # 用法：替换上游 Config/IPQ60XX-WIFI-YES.txt 的内容
 # 生成日期：2026-11-19
@@ -9,15 +9,15 @@
 CONFIG_TARGET_qualcommax=y
 CONFIG_TARGET_qualcommax_ipq60xx=y
 
-# ---------- 只编译 re-ss-01（亚瑟）一台设备 ----------
-CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_jdcloud_re-ss-01=y
+# ---------- 只编译 re-cs-02（雅典娜 AX6600）一台设备 ----------
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_jdcloud_re-ss-01=n
 CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_qihoo_360v6=n
 CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_anysafe_e1=n
 CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_cmiot_ax18=n
 CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_dptech_ap3000-2c=n
 CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_glinet_gl-ax1800=n
 CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_glinet_gl-axt1800=n
-CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_jdcloud_re-cs-02=n
+CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_jdcloud_re-cs-02=y
 CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_link_nn6000-v1=n
 CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_link_nn6000-v2=n
 CONFIG_TARGET_DEVICE_qualcommax_ipq60xx_DEVICE_linksys_mr7350=n
